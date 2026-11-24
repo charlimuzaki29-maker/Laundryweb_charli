@@ -5,13 +5,13 @@
 
 ## 1. LINK GITHUB
 
-- **URL Repository**: `https://github.com/Kuronami089/Laundryweb_charli`
+- **URL Repository**: `https://github.com/charlimuzaki29-maker/Laundryweb_charli`
 - **Branch Utama**: `main`
 
 ### Langkah Push ke Repository GitHub:
-Jika repository di akun GitHub `Kuronami089` sudah dibuat dengan nama `Laundryweb_charli`:
+Pastikan repository di akun GitHub `charlimuzaki29-maker` sudah dibuat dengan nama `Laundryweb_charli`:
 ```bash
-git remote add origin https://github.com/Kuronami089/Laundryweb_charli.git
+git remote set-url origin https://github.com/charlimuzaki29-maker/Laundryweb_charli.git
 git branch -M main
 git push -u origin main
 ```
