@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log Penggunaan AI - SIM Laundry</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f6f5f2;
+            color: #1c1917;
+            line-height: 1.6;
+            padding: 30px 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 860px;
+            margin: 0 auto;
+            background: #ffffff;
+            border: 1px solid #e7e5e4;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 4px;
+            color: #064e3b;
+        }
+        .meta {
+            font-size: 13px;
+            color: #78716c;
+            margin-bottom: 24px;
+            border-bottom: 1px solid #e7e5e4;
+            padding-bottom: 16px;
+        }
+        h2 {
+            font-size: 17px;
+            margin-top: 28px;
+            margin-bottom: 12px;
+            color: #1c1917;
+            border-bottom: 1px solid #f5f5f4;
+            padding-bottom: 6px;
+        }
+        .phase-card {
+            background-color: #fafaf9;
+            border: 1px solid #e7e5e4;
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin-bottom: 16px;
+        }
+        .phase-title {
+            font-weight: 700;
+            color: #065f46;
+            margin-bottom: 8px;
+        }
+        .prompt-box {
+            background-color: #ffffff;
+            border-left: 3px solid #059669;
+            padding: 8px 14px;
+            margin: 8px 0;
+            font-style: italic;
+            font-size: 13.5px;
+            color: #44403c;
+        }
+        ul {
+            margin: 8px 0;
+            padding-left: 20px;
+            font-size: 14px;
+        }
+        li {
+            margin-bottom: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Dokumen Log Penggunaan AI (Artificial Intelligence)</h1>
+        <div class="meta">
+            <strong>Proyek:</strong> Sistem Informasi Manajemen Laundry Berbasis Web (Laravel + MySQL + Tailwind CSS)<br>
+            <strong>Akun GitHub:</strong> charlimuzaki29-maker | <strong>Repository:</strong> https://github.com/charlimuzaki29-maker/Laundryweb_charli
+        </div>
+
+        <p>Dokumen ini mencatat secara transparan seluruh alur interaksi prompt, keputusan arsitektur, dan tindakan teknis yang dijalankan bersama AI Assistant (Google DeepMind Antigravity) dari awal hingga penyelesaian sistem.</p>
+
+        <h2>Riwayat Fase & Log Prompt AI</h2>
+
+        <div class="phase-card">
+            <div class="phase-title">Fase 1: Perancangan Arsitektur & Inisialisasi Proyek</div>
+            <div class="prompt-box">"Bangun aplikasi Sistem Informasi Manajemen Laundry Berbasis Web dengan Laravel, MySQL, dan Tailwind CSS (Blade)..."</div>
+            <ul>
+                <li>Menginisialisasi framework Laravel dan dependensi inti.</li>
+                <li>Konfigurasi koneksi MySQL ke basis data <code>laundry_db</code>.</li>
+                <li>Penerapan standar struktur MVC sesuai spesifikasi.</li>
+            </ul>
+        </div>
+
+        <div class="phase-card">
+            <div class="phase-title">Fase 2: Skema Database, Relasi, & Seeder</div>
+            <div class="prompt-box">"Buat skema database MySQL minimal 2 tabel utama: Layanan dan Transaksi... Tambahkan seeder paket layanan dan akun demo Admin & Kasir."</div>
+            <ul>
+                <li>Membuat migrasi <code>create_layanans_table</code> dan <code>create_transaksis_table</code> dengan foreign key cascade.</li>
+                <li>Menambahkan role <code>admin</code> dan <code>kasir</code> pada tabel <code>users</code>.</li>
+                <li>Membuat model Eloquent <code>Layanan</code> (hasMany Transaksi) dan <code>Transaksi</code> (belongsTo Layanan).</li>
+                <li>Membuat seeder paket layanan (Reguler, Ekspres, Superkilat) dan seeder kredensial.</li>
+            </ul>
+        </div>
+
+        <div class="phase-card">
+            <div class="phase-title">Fase 3: Autentikasi, Middleware, & Logika Bisnis</div>
+            <div class="prompt-box">"Terapkan pembatasan hak akses role Admin dan Kasir secara jelas dan konsisten dengan Middleware..."</div>
+            <ul>
+                <li>Membuat <code>RoleMiddleware</code> untuk mengisolasi hak akses berdasarkan role.</li>
+                <li>Menerapkan CRUD Layanan dengan proteksi khusus Admin, kasir hanya read-only.</li>
+                <li>Mengembangkan alur transaksi dengan auto-kalkulasi tarif dan endpoint update status pengerjaan.</li>
+            </ul>
+        </div>
+
+        <div class="phase-card">
+            <div class="phase-title">Fase 4: Pengujian Otomatis (PHPUnit)</div>
+            <div class="prompt-box">"Pastikan seluruh fitur berjalan tanpa error dan lulus seluruh poin pengujian."</div>
+            <ul>
+                <li>Menulis 22 pengujian otomatis (72 assertions) mencakup autentikasi, otorisasi role, validasi form, dan relasi transaksi.</li>
+                <li>Tingkat kelulusan pengujian: <strong>100% lulus (22 passed)</strong>.</li>
+                <li>Format cleaner otomatis menggunakan <code>Laravel Pint</code>.</li>
+            </ul>
+        </div>
+
+        <div class="phase-card">
+            <div class="phase-title">Fase 5: Redesign UI/UX "Warm Stone Sidebar & Pure White Workspace"</div>
+            <div class="prompt-box">"Lakukan redesign tampilan agar menggunakan gaya Warm Stone Sidebar & Pure White Workspace..."</div>
+            <ul>
+                <li>Mengimplementasikan sidebar kiri tetap di desktop (warna Warm Stone #F6F5F2) dan drawer responsif di mobile.</li>
+                <li>Menyederhanakan form login murni tanpa demo selector.</li>
+                <li>Mengaplikasikan tombol aksi Deep Forest Emerald (#064e3b / #022c22) dan indikator status pengerjaan yang ramah pengguna.</li>
+                <li>Build aset produksi dengan Vite (<code>npm run build</code>).</li>
+            </ul>
+        </div>
+
+        <div class="phase-card">
+            <div class="phase-title">Fase 6: Pengambilan Tangkapan Layar & Finalisasi Pengumpulan</div>
+            <div class="prompt-box">"Kerjakan semua soal untuk pengumpulan Google Form, push ke repo, dan siapkan dokumennya."</div>
+            <ul>
+                <li>Menjalankan script otomatisasi headless browser untuk mengambil 24 tangkapan layar multi-device (Desktop, Tablet, HP).</li>
+                <li>Mengambil screenshot skema basis data dan migration MySQL.</li>
+                <li>Menyusun seluruh jawaban Google Form secara terstruktur.</li>
+            </ul>
+        </div>
+
+        <h2>Kesimpulan Pemanfaatan AI</h2>
+        <p>AI dimanfaatkan secara produktif sebagai *co-pilot* teknis untuk mempercepat *time-to-delivery*, memastikan kesesuaian spesifikasi instruksi, menjaga integritas arsitektur relasional basis data, serta menjamin kehandalan kode melalui serangkaian pengujian fitur otomatis.</p>
+    </div>
+</body>
+</html>
