@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dokumentasi Pengumpulan GForm - SIM Laundry</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #1c1917; max-width: 900px; margin: 0 auto; padding: 40px 20px; background: #fafaf9; }
+        .doc-card { background: #ffffff; border: 1px solid #e7e5e4; border-radius: 16px; padding: 40px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        h1 { font-size: 24px; color: #0c0a09; border-bottom: 2px solid #064e3b; padding-bottom: 12px; margin-top: 0; }
+        h2 { font-size: 18px; color: #064e3b; margin-top: 36px; border-bottom: 1px solid #e7e5e4; padding-bottom: 8px; }
+        h3 { font-size: 15px; color: #292524; margin-top: 20px; }
+        code { background: #f5f5f4; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-family: Consolas, monospace; color: #064e3b; }
+        pre { background: #1c1917; color: #f5f5f4; padding: 14px; border-radius: 8px; font-size: 12px; overflow-x: auto; font-family: Consolas, monospace; }
+        table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
+        th { background: #f5f5f4; text-align: left; padding: 10px 12px; border: 1px solid #e7e5e4; font-weight: 600; color: #292524; }
+        td { padding: 10px 12px; border: 1px solid #e7e5e4; color: #44403c; }
+        .ss-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin: 16px 0; }
+        .ss-box { background: #f5f5f4; border: 1px solid #e7e5e4; border-radius: 8px; overflow: hidden; }
+        .ss-box img { width: 100%; height: auto; display: block; border-bottom: 1px solid #e7e5e4; }
+        .ss-box p { font-size: 11px; font-weight: 600; color: #57534e; margin: 8px 10px; }
+        .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+        .badge-green { background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; }
+        .callout { background: #f0fdf4; border-left: 4px solid #059669; padding: 12px 16px; border-radius: 0 8px 8px 0; margin: 16px 0; font-size: 13px; }
+    </style>
+</head>
+<body>
+    <div class="doc-card">
+        <h1>DOKUMENTASI PENGUMPULAN GOOGLE FORM</h1>
+        <p style="color: #78716c; font-size: 13px; margin-top: -6px;">Sistem Informasi Manajemen Laundry Berbasis Web (Laravel + MySQL + Tailwind CSS)</p>
+
+        <div class="callout">
+            <strong>Petunjuk Pengumpulan:</strong> Dokumen ini memuat jawaban lengkap untuk 6 butir pertanyaan pada Google Form. Seluruh screenshot asli telah disimpan di folder <code>screenshots/</code> pada repository lokal Anda.
+        </div>
+
+        <h2>1. Link GitHub</h2>
+        <p><strong>Jawaban:</strong></p>
+        <pre>https://github.com/Kuronami089/Laundryweb_charli</pre>
+        <p style="font-size: 12px; color: #78716c;">Perintah untuk push ke GitHub:</p>
+        <pre>git remote add origin https://github.com/Kuronami089/Laundryweb_charli.git
+git branch -M main
+git push -u origin main</pre>
+
+        <h2>2. Jelaskan Migration yang Dibuat (Beserta SS)</h2>
+        <p><strong>Jawaban:</strong></p>
+        <p>Aplikasi menggunakan database MySQL dengan skema relasional yang menghubungkan transaksi langsung ke paket layanan cuci.</p>
+        
+        <div class="ss-box" style="max-width: 100%; margin-bottom: 16px;">
+            <img src="screenshots/00_migration_ss.png" alt="Migration Schema">
+            <p>Screenshot: Struktur Migration & MySQL Describe Table</p>
+        </div>
+
+        <h3>Rincian Tabel:</h3>
+        <table>
+            <thead>
+                <tr><th>Tabel</th><th>Kolom Kunci</th><th>Tipe Data</th><th>Deskripsi / Relasi</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><code>layanans</code></td><td>id, nama_layanan, harga_per_kg, estimasi_waktu</td><td>BIGINT, VARCHAR, DECIMAL(12,2), VARCHAR</td><td>Menyimpan paket cuci (Reguler, Ekspres, Superkilat)</td></tr>
+                <tr><td><code>transaksis</code></td><td>id, layanan_id, nama_pelanggan, no_hp, berat, total_tarif, status</td><td>BIGINT, BIGINT (FK), VARCHAR, DECIMAL(8,2), DECIMAL(12,2), ENUM</td><td>Mencatat transaksi pelanggan. <code>layanan_id</code> terikat sebagai Foreign Key ke <code>layanans(id)</code> dengan CASCADE ON DELETE</td></tr>
+                <tr><td><code>users</code></td><td>id, name, email, password, role</td><td>BIGINT, VARCHAR, VARCHAR, VARCHAR, ENUM('admin','kasir')</td><td>Otentikasi dan pembedaan hak akses peran</td></tr>
+            </tbody>
+        </table>
+
+        <h2>3. SS Login & Register (Desktop, Tab, HP) & Perbedaan Role</h2>
+        <div class="ss-grid">
+            <div class="ss-box"><img src="screenshots/01_login_desktop.png"><p>Login Desktop (1280x800)</p></div>
+            <div class="ss-box"><img src="screenshots/01_login_tab.png"><p>Login Tab (768x1024)</p></div>
+            <div class="ss-box"><img src="screenshots/01_login_hp.png"><p>Login HP (375x812)</p></div>
+            <div class="ss-box"><img src="screenshots/02_register_desktop.png"><p>Register Desktop (1280x800)</p></div>
+            <div class="ss-box"><img src="screenshots/02_register_tab.png"><p>Register Tab (768x1024)</p></div>
+            <div class="ss-box"><img src="screenshots/02_register_hp.png"><p>Register HP (375x812)</p></div>
+        </div>
+
+        <h3>Perbedaan Role Admin vs Kasir:</h3>
+        <table>
+            <thead><tr><th>Hak Akses</th><th>Admin</th><th>Kasir</th><th>Mekanisme</th></tr></thead>
+            <tbody>
+                <tr><td>Login & Dashboard</td><td>Akses Penuh</td><td>Akses Operasional</td><td>Laravel Auth Session</td></tr>
+                <tr><td>Lihat Daftar Layanan</td><td>Ya</td><td>Ya (Mode Baca)</td><td>Route <code>layanan.index</code></td></tr>
+                <tr><td>Tambah / Edit / Hapus Layanan</td><td><strong>Bisa (CRUD Penuh)</strong></td><td><strong>Ditolak (403 Forbidden)</strong></td><td><code>RoleMiddleware('role:admin')</code></td></tr>
+                <tr><td>Input Order & Hitung Tarif</td><td>Ya</td><td>Ya (Operasional Utama)</td><td>Route <code>transaksi.create</code> / <code>store</code></td></tr>
+                <tr><td>Update Status Pengerjaan</td><td>Ya</td><td>Ya (Masuk &rarr; Proses &rarr; Selesai)</td><td>Route <code>transaksi.update-status</code></td></tr>
+                <tr><td>Rekap & Laporan Keuangan</td><td>Ya</td><td>Ya</td><td>Route <code>transaksi.index</code></td></tr>
+            </tbody>
+        </table>
+
+        <h2>4. SS Bagian CRUD Layanan (Desktop, Tab, HP)</h2>
+        <div class="ss-grid">
+            <div class="ss-box"><img src="screenshots/03_crud_layanan_index_desktop.png"><p>Daftar Layanan Desktop</p></div>
+            <div class="ss-box"><img src="screenshots/03_crud_layanan_index_tab.png"><p>Daftar Layanan Tab</p></div>
+            <div class="ss-box"><img src="screenshots/03_crud_layanan_index_hp.png"><p>Daftar Layanan HP</p></div>
+            <div class="ss-box"><img src="screenshots/04_crud_layanan_tambah_desktop.png"><p>Tambah Layanan Desktop</p></div>
+            <div class="ss-box"><img src="screenshots/04_crud_layanan_tambah_tab.png"><p>Tambah Layanan Tab</p></div>
+            <div class="ss-box"><img src="screenshots/04_crud_layanan_tambah_hp.png"><p>Tambah Layanan HP</p></div>
+            <div class="ss-box"><img src="screenshots/05_crud_layanan_ubah_desktop.png"><p>Ubah Layanan Desktop</p></div>
+            <div class="ss-box"><img src="screenshots/05_crud_layanan_ubah_tab.png"><p>Ubah Layanan Tab</p></div>
+            <div class="ss-box"><img src="screenshots/05_crud_layanan_ubah_hp.png"><p>Ubah Layanan HP</p></div>
+        </div>
+        <p><strong>Penjelasan:</strong> Admin dapat mengelola paket layanan secara fleksibel. Tampilan card grid 3 kolom menampilkan nama layanan, tarif per kg berformat Rupiah, dan estimasi waktu selesai. Tersedia seeder data default: Reguler (Rp 7.000/kg, 3-4 hari), Ekspres (Rp 12.000/kg, 1-2 hari), dan Superkilat (Rp 25.000/kg, 5 jam).</p>
+
+        <h2>5. SS Bagian Order & Rekap Order (Desktop, Tab, HP)</h2>
+        <div class="ss-grid">
+            <div class="ss-box"><img src="screenshots/06_order_baru_desktop.png"><p>Form Order Baru Desktop</p></div>
+            <div class="ss-box"><img src="screenshots/06_order_baru_tab.png"><p>Form Order Baru Tab</p></div>
+            <div class="ss-box"><img src="screenshots/06_order_baru_hp.png"><p>Form Order Baru HP</p></div>
+            <div class="ss-box"><img src="screenshots/07_rekap_order_desktop.png"><p>Rekap Order Desktop</p></div>
+            <div class="ss-box"><img src="screenshots/07_rekap_order_tab.png"><p>Rekap Order Tab</p></div>
+            <div class="ss-box"><img src="screenshots/07_rekap_order_hp.png"><p>Rekap Order HP</p></div>
+        </div>
+        <p><strong>Penjelasan:</strong> Formulir pencatatan order baru dilengkapi kalkulator otomatis live yang menghitung tarif berdasarkan berat (kg) &times; harga paket layanan. Di halaman rekap, disajikan Bar Metrik Horizontal (Total Pendapatan, Transaksi Proses, Transaksi Selesai) serta tabel data pelanggan lengkap dengan tombol update status satu klik.</p>
+
+        <h2>6. Log Penggunaan AI</h2>
+        <p>Berikut adalah catatan kronologis prompt & aktivitas AI selama pengerjaan:</p>
+        <ol style="font-size: 13px; color: #44403c;">
+            <li><strong>Fase 1: Inisialisasi Proyek:</strong> Setup Laravel 12, MySQL <code>laundry_db</code>, dependensi Tailwind CSS, dan Laravel Boost.</li>
+            <li><strong>Fase 2: Perancangan Database & Seeder:</strong> Pembuatan migration tabel <code>layanans</code>, <code>transaksis</code>, relasi Foreign Key, serta seeder akun Admin & Kasir.</li>
+            <li><strong>Fase 3: Pembangunan Logika Bisnis & Middleware:</strong> Pembuatan <code>RoleMiddleware</code>, <code>LayananController</code>, <code>TransaksiController</code>, Form Requests, dan kalkulasi tarif otomatis.</li>
+            <li><strong>Fase 4: Verifikasi & Testing PHPUnit:</strong> Pembuatan 22 unit & feature test otomatis (100% pass, 72 assertions) serta formatting Laravel Pint.</li>
+            <li><strong>Fase 5: Redesign UI/UX 1:</strong> Implementasi gaya Minimalist Monochrome Top-Nav.</li>
+            <li><strong>Fase 6: Redesign UI/UX 2:</strong> Implementasi tema Warm Stone Sidebar & Pure White Workspace (tombol emerald, drawer mobile).</li>
+            <li><strong>Fase 7: Pengambilan Tangkapan Layar & Dokumentasi:</strong> Otomatisasi screenshot 3 viewport (Desktop, Tab, HP) menggunakan script Puppeteer dan penyusunan jawaban Google Form.</li>
+        </ol>
+    </div>
+</body>
+</html>
